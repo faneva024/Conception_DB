@@ -21,3 +21,11 @@ Une colonne categorie VARCHAR(50) dans la table PLAT pourrait provoquer des prob
 
 #### Reponses:
 La quantité se place dans la table d'association ligne_commande car elle dépend à la fois de la commande et du plat commandé . 
+
+### Etape 4
+#### Tables:
+(nouveau) client(id_client, nom, telephone?)
+(modifie) commande(id_commande, date_commande,#id_client?)   
+
+#### Reponses:
+La clé étrangère id_client doit être facultative Donc  pet etre NULL car la plupart des clients sont de passage et ne sont pas enregistrés dans la base. Il faut utiliser une jointure externe LEFT JOIN pour ne perdre aucune commande sans client attribué.

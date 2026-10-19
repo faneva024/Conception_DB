@@ -40,3 +40,20 @@ LEFT JOIN commande ON serveur.id_serveur = commande.id_serveur
 LEFT JOIN ligne_commande ON commande.id_commande = ligne_commande.id_commande
 LEFT JOIN plat ON ligne_commande.id_plat = plat.id_plat
 GROUP BY serveur.id_serveur, serveur.nom;
+
+-- etape6
+-- Liste des commandes non soldées avec montant dû, montant payé et reste à payer
+SELECT
+c.id_commande,
+COALESCE(SUM(lc.quantite * lc.prix_unitaire), 0) AS montant_du,
+COALESCE(p.total_paye, 0) AS montant_paye,
+(COALESCE(SUM(lc.quantite * lc.prix_unitaire), 0) - COALESCE(p.total_paye, 0)) AS reste_a_payer
+FROM commande c
+JOIN ligne_commande lc ON c.id_commande = lc.id_commande
+LEFT JOIN (
+SELECT id_commande, SUM(montant) AS total_paye
+FROM paiement
+GROUP BY id_commande
+) p ON c.id_commande = p.id_commande
+GROUP BY c.id_commande, p.total_paye
+HAVING COALESCE(SUM(lc.quantite * lc.prix_unitaire), 0) > COALESCE(p.total_paye, 0);

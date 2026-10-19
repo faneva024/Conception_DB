@@ -38,3 +38,11 @@ La clé étrangère id_client doit être facultative Donc  peut etre NULL car la
 
 #### Reponses:
 Une table de salle est un meuble physique alors qu'une commande est un événement temporaire d'un service. Le nom table pose problème en SQL car c'est un mot-clé réservé dans SQL.
+
+### Etape 6
+#### Tables:
+(nouveau) mode_paiement(id_mode, nom)
+(nouveau) paiement(id_paiement, #id_commande, #id_mode, montant, reference?, date_paiement)   
+
+#### Reponses:
+Une colonne montant_paye ne suffit pas car un client peut payer en plusieurs fois ou combiner plusieurs modes de paiement avec leurs références respectives. Utiliser une table de référence permet de modifier facilement la liste des modes acceptés sans changer le schéma, contrairement à une contrainte CHECK qui impose de modifier la structure de la base.  

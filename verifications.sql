@@ -78,3 +78,16 @@ JOIN ligne_commande lc ON c.id_commande = lc.id_commande
 JOIN composition_plat cp ON lc.id_plat = cp.id_plat
 JOIN ingredient i ON cp.id_ingredient = i.id_ingredient
 GROUP BY i.id_ingredient, i.nom, i.unite;
+
+-- etape9
+-- Pour chaque menu: son prix, la somme des prix à la carte et l'économie réalisée
+SELECT
+m.nom AS menu,
+m.prix AS prix_menu,
+SUM(p.prix * cm.quantite) AS somme_prix_carte,
+(SUM(p.prix * cm.quantite) - m.prix) AS economie_realisee
+FROM plat m
+JOIN composition_menu cm ON m.id_plat = cm.id_menu
+JOIN plat p ON cm.id_plat = p.id_plat
+WHERE m.est_menu = TRUE
+GROUP BY m.id_plat, m.nom, m.prix;

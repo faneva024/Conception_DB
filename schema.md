@@ -62,3 +62,11 @@ Le montant total du `id_commande = 1` a augmenter de 1000 Ar (16000 au lieu de 1
 
 #### Reponses:
 Une colonne ingredients VARCHAR(500) empêche le calcul du stock, de la consommation théorique, ainsi que l'utilisation des jointures sur les ingrédients.   
+
+### Etape 9
+#### Tables:
+(modifie) plat(id_plat, nom, prix, #id_categorie, est_menu)
+(nouveau) composition_menu(#id_menu, #id_plat, quantite)   
+
+#### Reponses:
+Créer une table menu séparée est déconseillé car un menu se commande exactement comme un plat (il possède un nom, un prix et apparaît dans des lignes de commande). La contrainte CHECK (id_menu <> id_plat) empêche un menu de se contenir directement lui-même.   

@@ -1,5 +1,5 @@
 CREATE TABLE categorie(
-    id SERIAL PRIMARY KEY,
+    id_categorie SERIAL PRIMARY KEY,
     nom VARCHAR(50) NOT NULL
 );
 
@@ -9,7 +9,7 @@ INSERT INTO categorie(nom) VALUES('Soupes');
 INSERT INTO categorie(nom) VALUES('Desserts');
 INSERT INTO categorie(nom) VALUES('Boissons');
 
-ALTER TABLE plat ADD COLUMN id_categorie INTEGER REFERENCES categorie(id);
+ALTER TABLE plat ADD COLUMN id_categorie INTEGER REFERENCES categorie(id_categorie);
 
 UPDATE plat SET id_categorie=1 WHERE id_plat=1;
 UPDATE plat SET id_categorie=1 WHERE id_plat=2;

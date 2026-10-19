@@ -66,3 +66,15 @@ SUM(lc.quantite * lc.prix_unitaire) AS montant_total_historique
 FROM commande c
 JOIN ligne_commande lc ON c.id_commande = lc.id_commande
 GROUP BY c.id_commande;
+
+-- etape8
+-- Consommation théorique de chaque ingrédient
+SELECT
+i.nom AS ingredient,
+SUM(lc.quantite * cp.quantite) AS quantite_totale_consommee,
+i.unite
+FROM commande c
+JOIN ligne_commande lc ON c.id_commande = lc.id_commande
+JOIN composition_plat cp ON lc.id_plat = cp.id_plat
+JOIN ingredient i ON cp.id_ingredient = i.id_ingredient
+GROUP BY i.id_ingredient, i.nom, i.unite;

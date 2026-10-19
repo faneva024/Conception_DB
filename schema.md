@@ -54,3 +54,11 @@ Une colonne montant_paye ne suffit pas car un client peut  combiner plusieurs mo
 
 #### Reponses:
 Le montant total du `id_commande = 1` a augmenter de 1000 Ar (16000 au lieu de 15000)  .
+
+### Etape 8
+#### Tables:
+(nouveau) ingredient(id_ingredient, nom, unite, stock_actuel)
+(nouveau) composition_plat(#id_plat, #id_ingredient, quantite)   
+
+#### Reponses:
+Une colonne ingredients VARCHAR(500) empêche le calcul du stock, de la consommation théorique, ainsi que l'utilisation des jointures sur les ingrédients.   

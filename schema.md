@@ -45,4 +45,12 @@ Une table de salle est un meuble physique alors qu'une commande est un événeme
 (nouveau) paiement(id_paiement, #id_commande, #id_mode, montant, reference?, date_paiement)   
 
 #### Reponses:
-Une colonne montant_paye ne suffit pas car un client peut payer en plusieurs fois ou combiner plusieurs modes de paiement avec leurs références respectives. Utiliser une table de référence permet de modifier facilement la liste des modes acceptés sans changer le schéma, contrairement à une contrainte CHECK qui impose de modifier la structure de la base.  
+Une colonne montant_paye ne suffit pas car un client peut  combiner plusieurs modes de paiement avec leurs références respectives. Utiliser une table de référence permet de modifier facilement la liste des modes acceptés sans changer le schéma, contrairement à une contrainte CHECK qui impose de modifier la structure de la base.  
+
+### Etape 7
+#### Tables:
+(modifie) ligne_commande(#id_commande, #id_plat, quantite, prix_unitaire)
+(nouveau) historique_prix(id_historique, #id_plat, prix, date_debut)   
+
+#### Reponses:
+Le montant total du `id_commande = 1` a augmenter de 1000 Ar (16000 au lieu de 15000)  .

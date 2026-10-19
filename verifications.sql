@@ -57,3 +57,12 @@ GROUP BY id_commande
 ) p ON c.id_commande = p.id_commande
 GROUP BY c.id_commande, p.total_paye
 HAVING COALESCE(SUM(lc.quantite * lc.prix_unitaire), 0) > COALESCE(p.total_paye, 0);
+
+-- etape7
+-- Vérification que le montant d'une commande ne change plus malgré l'augmentation du prix du plat
+SELECT
+c.id_commande,
+SUM(lc.quantite * lc.prix_unitaire) AS montant_total_historique
+FROM commande c
+JOIN ligne_commande lc ON c.id_commande = lc.id_commande
+GROUP BY c.id_commande;
